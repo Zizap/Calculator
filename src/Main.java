@@ -7,11 +7,14 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите арифметическое выражение: ");
         String input = scanner.nextLine();
+        String[] parts;
 
-        String[] parts = input.split(" ");
+        if (input.length() <= 3){
+            parts = input.split("");
+        }
+        else {
+            parts = input.split(" ");
 
-        if (parts.length != 3) {
-            throw new Exception("Некорректное выражение");
         }
 
         String operand1 = parts[0];
