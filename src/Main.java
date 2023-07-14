@@ -58,7 +58,6 @@ public class Main {
             for (RomanNumeral value : values) {
                 if (resArabic == value.arabicNumeral){
                     resRoman = value.romanNumeral;
-                    System.out.println(value.romanNumeral);
                 }
             }
         } else {
