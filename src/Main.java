@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class Main {
 
+    static RomanNumeral[] values = RomanNumeral.values();
+
     public static void main(String[] args) throws Exception {
 
         Scanner scanner = new Scanner(System.in);
@@ -9,12 +11,10 @@ public class Main {
         String input = scanner.nextLine();
         String[] parts;
 
-        if (input.length() <= 3){
-            parts = input.split("");
-        }
-        else {
-            parts = input.split(" ");
+        parts = input.split(" ");
 
+        if (parts.length != 3) {
+            throw new Exception("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
         }
 
         String operand1 = parts[0];
@@ -54,8 +54,6 @@ public class Main {
 
         String resRoman = null;
 
-        RomanNumeral[] values = RomanNumeral.values();
-
         if (resArabic > 0) {
             for (RomanNumeral value : values) {
                 if (resArabic == value.arabicNumeral){
@@ -72,7 +70,6 @@ public class Main {
 
     static int symbolSearch(String num) throws Exception {
         int res = 0;
-        RomanNumeral[] values = RomanNumeral.values();
 
         for (RomanNumeral value : values) {
             if (num.equals(value.romanNumeral)){
