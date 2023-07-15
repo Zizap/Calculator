@@ -41,7 +41,7 @@ public class Main {
     }
 
     static int arabicCalc(int num1,int num2,String operator) throws Exception {
-        if (num1 > 10 || num2 > 10){
+        if (num1 > 10 || num2 > 10 || num1 == 0 || num2 == 0){
             throw new Exception("Калькулятор должен принимать на вход числа от 1 до 10 включительно, не более.");
         }
         return switch (operator) {
@@ -70,6 +70,7 @@ public class Main {
             for (RomanNumeral value : values) {
                 if (num == value.getArabicNumeral()){
                     res = value.getRomanNumeral();
+                    break;
                 }
             }
         } else {
