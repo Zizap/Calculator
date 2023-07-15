@@ -102,8 +102,16 @@ enum RomanNumeral {
     HUNDRED("C", 100);
 
 
-    final String romanNumeral;
-    final int arabicNumeral;
+    private final String romanNumeral;
+    private final int arabicNumeral;
+
+    String getRomanNumeral(){
+        return romanNumeral;
+    }
+
+    int getArabicNumeral(){
+        return arabicNumeral;
+    }
 
     RomanNumeral(String romanNumeral,int arabicNumeral){
         this.arabicNumeral = arabicNumeral;

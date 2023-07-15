@@ -7,29 +7,37 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите арифметическое выражение: ");
-        String input = scanner.nextLine();
-        String[] parts;
 
-        parts = input.split(" ");
+        while (true) {
+            System.out.print("Введите арифметическое выражение, если хотите выйти введите \"Exit\": ");
 
-        if (parts.length != 3) {
-            throw new Exception("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+            String input = scanner.nextLine();
+
+            if (input.equalsIgnoreCase("exit")) {
+                break;
+            }
+
+            String[] parts = input.split(" ");
+
+            if (parts.length != 3) {
+                throw new Exception("формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
+            }
+
+            String operand1 = parts[0];
+            String operator = parts[1];
+            String operand2 = parts[2];
+
+            try {
+                System.out.println(
+                        "Результат: " + arabicCalc(Integer.parseInt(operand1),Integer.parseInt(operand2),operator)
+                );
+            } catch (NumberFormatException e) {
+                System.out.println(
+                        "Результат: " + romanCalc(operand1,operand2,operator)
+                );
+            }
         }
 
-        String operand1 = parts[0];
-        String operator = parts[1];
-        String operand2 = parts[2];
-
-        try {
-            System.out.println(
-                    "Результат: " + arabicCalc(Integer.parseInt(operand1),Integer.parseInt(operand2),operator)
-            );
-        } catch (NumberFormatException e) {
-            System.out.println(
-                    "Результат: " + romanCalc(operand1,operand2,operator)
-            );
-        }
     }
 
     static int arabicCalc(int num1,int num2,String operator) throws Exception {
@@ -52,27 +60,31 @@ public class Main {
 
         int resArabic = arabicCalc(number1,number2,operator);
 
-        String resRoman = null;
+        return symbolSearch(resArabic);
+    }
 
-        if (resArabic > 0) {
+    static String symbolSearch(int num) throws Exception {
+        String res = null;
+
+        if (num > 0) {
             for (RomanNumeral value : values) {
-                if (resArabic == value.arabicNumeral){
-                    resRoman = value.romanNumeral;
+                if (num == value.getArabicNumeral()){
+                    res = value.getRomanNumeral();
                 }
             }
         } else {
             throw new Exception("Результатом работы калькулятора с римскими числами могут быть только положительные числа");
         }
 
-        return resRoman;
+        return res;
     }
 
     static int symbolSearch(String num) throws Exception {
         int res = 0;
 
         for (RomanNumeral value : values) {
-            if (num.equals(value.romanNumeral)){
-                res = value.arabicNumeral;
+            if (num.equals(value.getRomanNumeral())){
+                res = value.getArabicNumeral();
                 break;
             }
         }
